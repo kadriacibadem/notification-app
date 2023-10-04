@@ -1,0 +1,16 @@
+Creating a Kafka Topic
+$ docker-compose exec kafka kafka-topics.sh --create --topic baeldung_linux
+  --partitions 1 --replication-factor 1 --bootstrap-server kafka:9092
+
+
+To build to a Docker daemon, use:
+  mvn compile com.google.cloud.tools:jib-maven-plugin:3.4.0:dockerBuild
+
+$ docker-compose exec kafka kafka-topics.sh --create --topic messages
+  --partitions 1 --replication-factor 1 --bootstrap-server kafka:9092
+
+mvn compile jib:dockerBuild
+
+
+docker image prune
+

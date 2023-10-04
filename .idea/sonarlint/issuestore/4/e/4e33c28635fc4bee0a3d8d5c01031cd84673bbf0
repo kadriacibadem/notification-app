@@ -1,0 +1,9 @@
+
+m
+java:S36551"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ƒÜµØ8ÚÌÔ´¯1
+r
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¾ÜÊıÿÿÿÿ8ºŒ½µ¯1
+o
+java:S1128"RRemove this unused import 'com.example.notificationservice.entity.CustomerEntity'.(ÂÚøù8ÇŒ½µ¯1
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ÇŒ½µ¯1
