@@ -1,5 +1,6 @@
 package com.example.notificationservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class ReceiverEntity {
 
     @ManyToOne
     @JoinColumn(name = "message_bank_id")
+    @JsonIgnore
     private MessageEntity messageEntityRecipent;
 
 }
