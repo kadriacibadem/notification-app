@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface MessageService {
      void createNotification(MessageResponse messageResponse);
      List<MessageEntity> getAllNotification();
-    MessageEntity sendNotificationToMail();
+;
 }

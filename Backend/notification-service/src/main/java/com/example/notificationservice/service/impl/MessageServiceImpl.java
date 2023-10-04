@@ -50,9 +50,4 @@ public class MessageServiceImpl implements MessageService {
     }
 
 
-    @Override
-    public MessageEntity sendNotificationToMail(){
-        return messageRepository.findById(4).get();
-    }
-
 }

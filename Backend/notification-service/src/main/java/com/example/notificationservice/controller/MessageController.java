@@ -33,21 +33,5 @@ public class MessageController {
         return messageService.getAllNotification();
     }
 
-    @GetMapping("/sendmail")
-    @Retry(name="default")
-    public String sendMail(){
-        MessageEntity messageEntity = messageService.sendNotificationToMail();
-        MessageDTO messageDTO = new MessageDTO(messageEntity);
-        kafkaServiceImpl.sendMessage(messageDTO);
-        return "success";
-    }
-
-//    @GetMapping("/send2")
-//    public String sendNoti2() throws MessagingException {
-//        PoolEntity poolEntity = poolService.sendNotificationToMail();
-//        mailSender.sendEMail("kadriacibadem@hotmail.com", "subject", poolEntity.getDefinitionEntity().getTemplate());
-//        return "success";
-//    }
-
 
 }
