@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 public class EmailSenderServiceImpl implements EmailSenderService {
     private final JavaMailSender javaMailSender;
     @Override
-    public void sendEmail(String from, String to, String subject, String content) {
+    public String sendEmail(String from, String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
         javaMailSender.send(message);
+        return "Sended";
     }
 }

@@ -16,7 +16,7 @@ function Notification() {
         customers : [],
         fromTime : fromTime,
         toTime : toTime,
-        sender: "kadriacibadem@gmail.com"
+        sender: "kadriacibadem08@gmail.com"
     });
 
 

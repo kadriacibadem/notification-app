@@ -7,8 +7,6 @@ import com.example.notificationservice.response.MessageResponse;
 import java.util.List;
 
 public interface ReceiverService {
-    void getMessageFromQueue(MessageEntity messageEntity, MessageResponse messageResponse);
-    void sendMessageToMail();
-    void sendMessageToSms();
-    void sendMessageToNotification();
+    Boolean getMessageFromQueue(MessageEntity messageEntity, MessageResponse messageResponse);
+
 }

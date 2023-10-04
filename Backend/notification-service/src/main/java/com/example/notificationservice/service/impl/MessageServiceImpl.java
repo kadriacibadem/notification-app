@@ -34,9 +34,15 @@ public class MessageServiceImpl implements MessageService {
         messageEntity.setPosition("SENDING");
         messageEntity.setAttemptCount(0);
         messageRepository.save(messageEntity);
-        receiverService.getMessageFromQueue(messageEntity, messageResponse);
 
-
+        if(receiverService.getMessageFromQueue(messageEntity, messageResponse)) {
+            messageEntity.setPosition("SENT");
+            messageRepository.save(messageEntity);
+        }
+        else {
+            messageEntity.setPosition("FAILED");
+            messageRepository.save(messageEntity);
+        }
     }
     @Override
     public List<MessageEntity> getAllNotification(){
