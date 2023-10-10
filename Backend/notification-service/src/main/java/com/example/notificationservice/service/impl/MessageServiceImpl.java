@@ -1,6 +1,5 @@
 package com.example.notificationservice.service.impl;
 
-import com.example.notificationservice.entity.CustomerEntity;
 import com.example.notificationservice.entity.TemplateEntity;
 import com.example.notificationservice.entity.MessageEntity;
 import com.example.notificationservice.repository.TemplateRepository;
@@ -9,10 +8,9 @@ import com.example.notificationservice.response.MessageResponse;
 import com.example.notificationservice.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 @Service
@@ -20,6 +18,7 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final TemplateRepository templateRepository;
     private final ReceiverServiceImpl receiverService;
+    private Logger log = Logger.getLogger(MessageServiceImpl.class.getName());
 
 
     @Override
@@ -37,10 +36,12 @@ public class MessageServiceImpl implements MessageService {
 
         if(receiverService.getMessageFromQueue(messageEntity, messageResponse)) {
             messageEntity.setPosition("SENT");
+            log.info("Message sent successfully to id: "+messageEntity.getId());
             messageRepository.save(messageEntity);
         }
         else {
             messageEntity.setPosition("FAILED");
+            log.info("Message failed to send id: "+messageEntity.getId());
             messageRepository.save(messageEntity);
         }
     }

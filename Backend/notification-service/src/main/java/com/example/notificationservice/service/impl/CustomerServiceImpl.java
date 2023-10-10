@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private Logger log = Logger.getLogger(CustomerServiceImpl.class.getName());
     @Override
     public List<CustomerEntity> getAllCustomers() {
         return customerRepository.findAll();
@@ -21,5 +23,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void createCustomer(CustomerEntity customerEntity) {
         customerRepository.save(customerEntity);
+        log.info("Customer created successfully");
     }
 }

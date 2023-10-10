@@ -15,6 +15,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class ReceiverServiceImpl implements ReceiverService {
     private final ReceiverRepository receiverRepository;
     private final EmailSenderServiceImpl emailSenderService;
     private final SmsSenderServiceImpl smsSenderService;
+    private Logger log = Logger.getLogger(ReceiverServiceImpl.class.getName());
 
     @Override
     public Boolean getMessageFromQueue(MessageEntity messageEntity, MessageResponse messageResponse) {
@@ -39,6 +41,7 @@ public class ReceiverServiceImpl implements ReceiverService {
                     if ("FAILED".equals(status))
                         isAllMessagesSent.set(false);
                 } finally {
+                    log.info("ReceiverEntity saved successfully to id: " + receiverEntity.getId());
                     saveReceiverEntity(receiverEntity);
                     latch.countDown();
                 }

@@ -1,17 +1,16 @@
 package com.example.notificationservice.service.impl;
 
 import com.example.notificationservice.dtos.MessageDTO;
-import com.example.notificationservice.service.KafkaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.notificationservice.service.KafkaProducer;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KafkaServiceImpl implements KafkaService {
+public class KafkaProducerImpl implements KafkaProducer {
 
     private final KafkaTemplate<String,MessageDTO> kafkaTemplate;
 
-    public KafkaServiceImpl(KafkaTemplate<String, MessageDTO> kafkaTemplate) {
+    public KafkaProducerImpl(KafkaTemplate<String, MessageDTO> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

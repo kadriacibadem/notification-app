@@ -1,4 +1,8 @@
 
-X	java:S125."<This block of commented-out lines of code should be removed.(Ö†Ö—8É–¾©¯1
-o
-java:S1128"RRemove this unused import 'com.example.notificationservice.entity.TemplateEntity'.(µ¼Ò¤8·Ëıª¯1
+S
+java:S1128	"6Remove this unused import 'lombok.extern.log4j.Log4j'.(ñÔêĞ8ñ£şŸ±1
+S
+java:S1128
+"7Remove this unused import 'lombok.extern.log4j.Log4j2'.(ÅP8ñ£şŸ±1
+R
+java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš8ò£şŸ±1
