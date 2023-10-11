@@ -86,9 +86,15 @@ public class ReceiverServiceImpl implements ReceiverService {
     private String sendNotification(ReceiverEntity receiverEntity, MessageEntity messageEntity) {
         if (receiverEntity.getReceiverAddress().contains("@")) {
             return emailSenderService.sendEmail(messageEntity.getSender(), receiverEntity.getReceiverAddress(), "subject", messageEntity.getTemplateEntity().getContext());
-        } else {
+        } else if(receiverEntity.getReceiverAddress().contains("0")){
             Boolean status = smsSenderService.sendSms(receiverEntity.getReceiverAddress(), messageEntity.getTemplateEntity().getContext());
-            return status.toString();
+            if(status)
+                return "Sended";
+            else
+                return "Failed";
+        }else{
+            // Bildirim göndermek için gerekli kodları burada eklenecek.
+            return "FAILED";
         }
     }
 
