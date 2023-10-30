@@ -4,14 +4,17 @@ import com.example.notificationservice.entity.CustomerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResponse {
+@ToString
+public class MessageResponse implements Serializable {
     private int templateId;
     private List<CustomerEntity> customers;
     private String sender;

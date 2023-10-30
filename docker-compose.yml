@@ -184,7 +184,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./WireMock/sms.json:/home/wiremock/mappings/sms.json
+      - ./WireMock:/home/wiremock/mappings/
     networks:
       - notification-network
 networks:

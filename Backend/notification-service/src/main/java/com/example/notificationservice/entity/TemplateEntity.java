@@ -35,9 +35,6 @@ public class TemplateEntity {
     @Column(name = "created_ip")
     private String ip;
 
-    @Column(name = "template_attempt_count")
-    private int attemptCount;
-
     @Column(name="exclusion_period_start")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate exclusionStartTime;

@@ -14,11 +14,10 @@ function Notification() {
     const [serverData , setServerData] = useState({
         templateId : "",
         customers : [],
-        fromTime : fromTime,
-        toTime : toTime,
-        sender: "kadriacibadem08@gmail.com"
+        fromTime : null,
+        toTime : null,
+        sender: "kadriacibadem@gmail.com"
     });
-
 
     const handleCustomerClick = (customer) => {
         if (selectedCustomers.includes(customer)) {
@@ -63,12 +62,13 @@ function Notification() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setServerData({ ...serverData, fromTime: fromTime, toTime: toTime });
-        if(serverData.templateId === "" || serverData.customers.length===0){
+        serverData.fromTime = fromTime;
+        serverData.toTime = toTime;
+        if(serverData.templateId === "" || serverData.customers.length===0
+        ){
             alert("Lütfen tüm alanları doldurunuz.")
             return;
         }
-        console.log(serverData)
          try{
             const response = await axios.post(
                 'http://localhost:8000/message/create',

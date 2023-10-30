@@ -146,6 +146,7 @@ function Template(props) {
                             placeholderText='Başlama Tarihini Seçiniz'
                             required
                             withPortal
+                            minDate={new Date()}
                         />
                     </div>
                     <div className='col-md-2'>
@@ -156,7 +157,7 @@ function Template(props) {
                             placeholderText='Bitiş Tarihini Seçiniz'
                             required
                             withPortal
-                            
+                            minDate={exclusionStartTime ? exclusionStartTime : new Date()}
                         />
                     </div>
                     <div className='col-md-2'>

@@ -2,17 +2,20 @@ package com.example.senderservice.dtos;
 
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+import java.time.LocalTime;
+import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@ToString
 public class MessageDTO {
+    private int templateId;
+    private List<CustomerEntity> customers;
     private String sender;
-    private String receiver;
-    private String subject;
-    private String content;
-}
+    private LocalTime fromTime;
+    private LocalTime toTime;}
 

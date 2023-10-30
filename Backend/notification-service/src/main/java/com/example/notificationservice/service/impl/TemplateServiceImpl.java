@@ -27,8 +27,9 @@ public class TemplateServiceImpl implements TemplateService {
         }
     }
 
+    @Override
     public List<TemplateEntity> getAll(){
-        return templateRepository.findAll();
+        return templateRepository.findAllByPositionTrue();
     }
 
     @Override

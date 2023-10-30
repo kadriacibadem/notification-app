@@ -54,7 +54,22 @@ public class ReceiverServiceImpl implements ReceiverService {
         return isAllMessagesSent.get();
     }
 
-    private List<ReceiverEntity> createReceiverEntities(MessageEntity messageEntity, MessageResponse messageResponse) {
+    @Override
+    public void createReceiverAndSaveToDBForPlanned(MessageEntity messageEntity, MessageResponse messageResponse) {
+        List<ReceiverEntity> receiverList = createReceiverEntities(messageEntity, messageResponse);
+        receiverList.forEach(receiverEntity -> {
+            receiverEntity.setPosition("WAITING");
+            saveReceiverEntity(receiverEntity);
+        });
+    }
+
+    @Override
+    public List<ReceiverEntity> getWaitingReceivers(Integer id) {
+        return receiverRepository.findReceiverEntitiesWaiting(id);
+    }
+
+    @Override
+    public List<ReceiverEntity> createReceiverEntities(MessageEntity messageEntity, MessageResponse messageResponse) {
         List<ReceiverEntity> receiverList = new ArrayList<>();
         for (CustomerEntity customerEntity : messageResponse.getCustomers()) {
             ReceiverEntity receiverEntity = new ReceiverEntity();
@@ -83,22 +98,28 @@ public class ReceiverServiceImpl implements ReceiverService {
         return null;
     }
 
-    private String sendNotification(ReceiverEntity receiverEntity, MessageEntity messageEntity) {
-        if (receiverEntity.getReceiverAddress().contains("@")) {
-            return emailSenderService.sendEmail(messageEntity.getSender(), receiverEntity.getReceiverAddress(), "subject", messageEntity.getTemplateEntity().getContext());
-        } else if(receiverEntity.getReceiverAddress().contains("0")){
-            Boolean status = smsSenderService.sendSms(receiverEntity.getReceiverAddress(), messageEntity.getTemplateEntity().getContext());
+    @Override
+    public String sendNotification(ReceiverEntity receiverEntity, MessageEntity messageEntity) {
+        if (messageEntity.getChannel().equals("Mail")) {
+            boolean status = emailSenderService.sendEmailMock("from", receiverEntity.getReceiverAddress(), "Subject", messageEntity.getTemplateEntity().getContext());
             if(status)
-                return "Sended";
+                return "SENT";
             else
-                return "Failed";
+                return "FAILED";
+        } else if(messageEntity.getChannel().equals("SMS")){
+            boolean status = smsSenderService.sendSms(receiverEntity.getReceiverAddress(), messageEntity.getTemplateEntity().getContext());
+            if(status)
+                return "SENT";
+            else
+                return "FAILED";
         }else{
             // Bildirim göndermek için gerekli kodları burada eklenecek.
             return "FAILED";
         }
     }
 
-    private void saveReceiverEntity(ReceiverEntity receiverEntity) {
+    @Override
+    public void saveReceiverEntity(ReceiverEntity receiverEntity) {
         receiverRepository.save(receiverEntity);
     }
 
@@ -109,4 +130,12 @@ public class ReceiverServiceImpl implements ReceiverService {
             Thread.currentThread().interrupt();
         }
     }
+
+    @Override
+    public void updateReceiverStatus(int id, String sent) {
+        ReceiverEntity receiverEntity = receiverRepository.findById(id).orElseThrow();
+        receiverEntity.setPosition(sent);
+        receiverRepository.save(receiverEntity);
+    }
+
 }

@@ -29,9 +29,6 @@ public class MessageEntity {
     @Column(name="message_position")
     private String position;
 
-    @Column(name="message_attempt_count")
-    private int attemptCount;
-
     @Column(name="active_from")
     private LocalTime activeFrom;
 
@@ -40,6 +37,9 @@ public class MessageEntity {
 
     @Column(name="message_channel")
     private String channel;
+
+    @Column(name="retry_count")
+    private int retryCount=0;
 
     @Embedded
     private BaseEntity baseEntity;

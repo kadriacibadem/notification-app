@@ -1,13 +1,13 @@
 {
   "request": {
     "method": "GET",
-    "url": "/api/test"
+    "url": "/email/send"
   },
   "response": {
     "status": 200,
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": "Sms sent successfully"
+    "body": "Email sent successfully"
   }
 }

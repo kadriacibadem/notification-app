@@ -1,3 +1,5 @@
 
+i
+java:S1192)"GDefine a constant instead of duplicating this literal "FAILED" 4 times.(Æ‚Ñîýÿÿÿÿ8ÔŸõîµ1
 j
-java:S2095!"MUse try-with-resources or close this "ExecutorService" in a "finally" clause.(Ê¼Ï³8À±åŸ±1
+java:S2095!"MUse try-with-resources or close this "ExecutorService" in a "finally" clause.(Ê¼Ï³8Œ õîµ1

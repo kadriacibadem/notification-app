@@ -2,6 +2,9 @@ package com.example.notificationservice.controller;
 
 import com.example.notificationservice.entity.MessageEntity;
 import com.example.notificationservice.response.MessageResponse;
+import com.example.notificationservice.service.KafkaProducer;
+import com.example.notificationservice.service.MessageService;
+import com.example.notificationservice.service.TemplateService;
 import com.example.notificationservice.service.impl.MessageServiceImpl;
 import com.example.notificationservice.service.impl.KafkaProducerImpl;
 import com.example.notificationservice.service.impl.TemplateServiceImpl;
@@ -13,15 +16,18 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/message")
-@CrossOrigin(origins = "http://localhost:3000/")
 public class MessageController {
-    private final MessageServiceImpl messageService;
-    private final KafkaProducerImpl kafkaProducer;
-    private final TemplateServiceImpl templateService;
+    private final MessageService messageService;
+    private final KafkaProducer kafkaProducer;
+    private final TemplateService templateService;
 
     @PostMapping("/create")
     public String createNotification(@RequestBody MessageResponse messageResponse){
-        messageService.createNotification(messageResponse);
+        if(messageResponse.getFromTime()!=null || messageResponse.getToTime()!= null){
+            messageService.createNotificationPlan(messageResponse);
+        }else{
+            messageService.createNotificationNow(messageResponse);
+        }
         return "success";
     }
 

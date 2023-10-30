@@ -13,17 +13,22 @@ public class SmsSenderServiceImpl implements SmsSenderService {
             return false;
         else{
             String response = fetchDataFromSmsProvider();
-            if(response.equals("Sms sent successfully"))
+            if(response.contains("200"))
                 return true;
             else
                 return false;
         }
     }
 
+    @Override
     public String fetchDataFromSmsProvider() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:8081/sms/send", String.class);
-        System.out.println(response.getBody());
-        return response.getBody();
+        ResponseEntity<String> response;
+        try{
+           response = restTemplate.getForEntity("http://localhost:8081/sms/send", String.class);
+        }catch (Exception e){
+            return "500";
+        }
+        return response.getStatusCode().toString();
     }
 }

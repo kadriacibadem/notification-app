@@ -1,0 +1,9 @@
+
+c
+java:S1126"AReplace this if-then-else statement by a single return statement.(Ãå™ıûÿÿÿÿ8”ÜÒÚ¶1
+d
+java:S1128"GRemove this unused import 'org.springframework.mail.SimpleMailMessage'.(€·ÊŒ8ƒéÃİ·1
+j
+java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8†éÃİ·1
+R
+java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš8‘Åİ·1
