@@ -16,7 +16,6 @@ public class TemplateCheck {
     private final TemplateRepository templateRepository;
 
     @Scheduled(cron = "0 0 0 * * ?")
-    @Transactional
     public void checkTemplateEntities(){
         try{
             List<TemplateEntity> templateEntities = templateRepository.getTemplateEntitiesForCheckTime();

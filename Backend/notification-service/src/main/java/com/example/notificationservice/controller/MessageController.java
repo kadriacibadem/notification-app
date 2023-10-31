@@ -5,9 +5,7 @@ import com.example.notificationservice.response.MessageResponse;
 import com.example.notificationservice.service.KafkaProducer;
 import com.example.notificationservice.service.MessageService;
 import com.example.notificationservice.service.TemplateService;
-import com.example.notificationservice.service.impl.MessageServiceImpl;
-import com.example.notificationservice.service.impl.KafkaProducerImpl;
-import com.example.notificationservice.service.impl.TemplateServiceImpl;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +20,7 @@ public class MessageController {
     private final TemplateService templateService;
 
     @PostMapping("/create")
+    @RateLimiter(name = "default")
     public String createNotification(@RequestBody MessageResponse messageResponse){
         if(messageResponse.getFromTime()!=null || messageResponse.getToTime()!= null){
             messageService.createNotificationPlan(messageResponse);
@@ -32,9 +31,9 @@ public class MessageController {
     }
 
     @GetMapping("/getall")
+    @RateLimiter(name = "default")
     public List<MessageEntity> getAllNotification(){
         return messageService.getAllNotification();
     }
-
 
 }
