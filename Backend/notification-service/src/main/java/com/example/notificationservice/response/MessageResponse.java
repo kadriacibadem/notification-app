@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MessageResponse implements Serializable {
+public class MessageResponse {
     private int templateId;
     private List<CustomerEntity> customers;
     private String sender;

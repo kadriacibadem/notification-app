@@ -101,13 +101,16 @@ public class ReceiverServiceImpl implements ReceiverService {
     @Override
     public String sendNotification(ReceiverEntity receiverEntity, MessageEntity messageEntity) {
         if (messageEntity.getChannel().equals("Mail")) {
-            boolean status = emailSenderService.sendEmailMock("from", receiverEntity.getReceiverAddress(), "Subject", messageEntity.getTemplateEntity().getContext());
+            boolean status = emailSenderService.sendEmailMock("from",
+                    receiverEntity.getReceiverAddress(), "Subject",
+                    messageEntity.getTemplateEntity().getContext());
             if(status)
                 return "SENT";
             else
                 return "FAILED";
         } else if(messageEntity.getChannel().equals("SMS")){
-            boolean status = smsSenderService.sendSms(receiverEntity.getReceiverAddress(), messageEntity.getTemplateEntity().getContext());
+            boolean status = smsSenderService.sendSms(receiverEntity.getReceiverAddress(),
+                    messageEntity.getTemplateEntity().getContext());
             if(status)
                 return "SENT";
             else
